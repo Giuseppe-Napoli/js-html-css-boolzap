@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>Boozap</title>
+</head>
+<body>
+  
+  <div id="app" class="container">
+
+    <aside class="left">
+
+      <div class="aside-top">
+        <div class="top-sx">
+          <img src="assets/img/avatar_io.jpg" alt="avatar_io" class="left">
+            <h4 class="left">Nome Utente</h4>
+        </div>
+        <div class="top-dx">
+          <i class="fas fa-circle-notch"></i>
+          <i class="fas fa-comment-alt"></i>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </div>
+
+      <div class="aside-center">
+        <i class="fas fa-bell-slash left"></i>
+        <div class="area-notifiche left">
+          <h4>Ricevi notifiche di nuovi messaggi</h4>
+          <a href="#">Attiva notifiche desktop</a>
+        </div>
+      </div>
+
+      <div class="aside-bottom">
+        <div class="bottom-top">
+          <div class="search-chat">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Cerca o inizia una nuova chat">
+          </div>
+        </div>
+        <div class="list-account">
+          <ul class="utenti">
+
+            <!-- ciclo v-for per stampare i nomi -->
+            <li
+              v-for='(contatto,index) in contacts'
+              >
+              <img :src="getImage(index)" class="left" alt="avatar">
+              <h4 class="left">{{contatto.name}}</h4>
+            </li>
+
+           <!--  <li>
+              <img src="assets/img/avatar_2.jpg" class="left" alt="">
+              <h4 class="left">Fabio</h4>
+            </li>
+            <li>
+              <img src="assets/img/avatar_3.jpg" class="left" alt="">
+              <h4 class="left">Samuele</h4>
+            </li>
+            <li>
+              <img src="assets/img/avatar_4.jpg" class="left" alt="">
+              <h4 class="left">Luisa</h4>
+            </li> -->
+          </ul>
+          
+  
+        </div>
+      </div>
+    </aside>
+
+    <main  class="left">
+      <header>
+        <div class="header-sx">
+          <img src="assets/img/avatar_1.jpg" alt="avatar_1" class="left">
+          <div class="chat-utente left">
+            <h4>Michele</h4>
+            <span>Ultimo accesso oggi alle</span>
+          </div>
+        </div>
+        <div class="header-dx">
+          <i class="fas fa-search"></i>
+          <i class="fas fa-paperclip"></i>
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+      </header>
+      <section>
+        <div class="text-dx right">
+          <div class="sent">
+            <i class="fas fa-chevron-down right"></i>
+            <p>Hai portato a spasso il cane?</p>
+            <span class="right">10/01/2020 15:30:55</span>
+          </div>
+        </div>
+        <div class="text-dx right">
+          <div class="sent">
+            <i class="fas fa-chevron-down right"></i>
+            <p>Ricordati di dargli da mangiare</p>
+            <span class="right">10/01/2020 15:50:00</span>
+          </div>
+        </div>
+        <div class="text-sx left">
+          <div class="received">
+            <i class="fas fa-chevron-down right"></i>
+            <p>Tutto fatto!</p>
+            <span class="right">10/01/2020 16:15:22</span>
+          </div>
+        </div>
+      </section>
+      <footer>
+          <i class="far fa-smile"></i>
+
+          <input type="text" placeholder="Scrivi un messaggio">
+          
+          <i class="fas fa-microphone"></i>
+      </footer>
+    </main>
+
+
+  </div>
+
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
