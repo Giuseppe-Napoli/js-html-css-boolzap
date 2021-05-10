@@ -2,7 +2,14 @@ const app = new Vue({
 
   el:'#app',
   data:{
-    contacts: [
+    now:dayjs().format('dddd MM MMMM YYYY HH:mm:ss') ,
+    nowTxt:dayjs().format('MM/MM/YYYY HH:mm:ss') ,
+    utenteSelezionato: 0,
+    user: {
+      name:'Giuseppe Napoli',
+      avatar: '_giuseppe'
+    },
+      contacts: [
       {
         name: 'Michele',
         avatar: '_1',
@@ -94,5 +101,10 @@ const app = new Vue({
     getImage(index){
       return `assets/img/avatar${this.contacts[index].avatar}.jpg`;
     }
+  },
+  mounted(){
+    setTimeout(()=>{
+      this.now = dayjs().format('dddd MM MMMM YYYY HH:mm:ss')
+    },1000)
   }
 })

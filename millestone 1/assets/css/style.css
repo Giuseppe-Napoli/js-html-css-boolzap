@@ -250,8 +250,10 @@ section .text-sx .received:hover .fa-chevron-down{
 .container section .text-sx .received,
 .container section .text-dx .sent{
   min-height: 52px;
-  width: 32%;
+  min-width: 32%;
+  max-width: 60%;
   border-radius: 10px;
+/*   display: none; */
 }
 
 .container section .text-sx .received p,
