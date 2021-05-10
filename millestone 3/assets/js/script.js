@@ -5,10 +5,12 @@ const app = new Vue({
     now:dayjs().format('dddd MM MMMM YYYY HH:mm:ss') ,
     nowTxt:dayjs().format('MM/MM/YYYY HH:mm:ss') ,
     utenteSelezionato: 0,
-    user: {
-      name:'Giuseppe Napoli',
-      avatar: '_giuseppe'
-    },
+    
+    name:'Giuseppe Napoli',
+    avatar: '_giuseppe',
+    testo:'',
+    risposta: ['ok','ciao','va bene', 'come stai?','tutto bene?', 'che mi racconti?'],
+  
       contacts: [
       {
         name: 'Michele',
@@ -100,8 +102,29 @@ const app = new Vue({
     //funzione che mi restituisce l'immagine
     getImage(index){
       return `assets/img/avatar${this.contacts[index].avatar}.jpg`;
-    }
+    },
+
+    addMsg() {
+      this.contacts[this.utenteSelezionato].messages.push(
+        {
+          date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+          text: this.testo,
+          status: 'sent'
+        }
+      );
+      this.testo = '';
+      setTimeout(() => {
+        this.contacts[this.utenteSelezionato].messages.push(
+          {
+            date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+            text: this.risposta[Math.floor(Math.random()*this.risposta.length)],
+            status: 'received'
+          }
+        );
+      }, 1000);
+    },
   },
+  
   mounted(){
     setTimeout(()=>{
       this.now = dayjs().format('dddd MM MMMM YYYY HH:mm:ss')
