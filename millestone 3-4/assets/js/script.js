@@ -1,17 +1,20 @@
 const app = new Vue({
 
   el:'#app',
+
   data:{
+
     now:dayjs().format('dddd MM MMMM YYYY HH:mm:ss') ,
     nowTxt:dayjs().format('MM/MM/YYYY HH:mm:ss') ,
     utenteSelezionato: 0,
-    
+    search: "",
+    testo:'',
+
     name:'Giuseppe Napoli',
     avatar: '_giuseppe',
-    testo:'',
     risposta: ['ok','ciao','va bene', 'come stai?','tutto bene?', 'che mi racconti?'],
   
-      contacts: [
+    contacts: [
       {
         name: 'Michele',
         avatar: '_1',
@@ -96,14 +99,17 @@ const app = new Vue({
         ],
       },
     ]
+
   },
 
   methods:{
+
     //funzione che mi restituisce l'immagine
     getImage(index){
       return `assets/img/avatar${this.contacts[index].avatar}.jpg`;
     },
 
+    //funzione che aggiunge il testo nella section assegnadogli anche la data e lo status
     addMsg() {
       this.contacts[this.utenteSelezionato].messages.push(
         {
@@ -123,6 +129,19 @@ const app = new Vue({
         );
       }, 1000);
     },
+
+    //funzione che mi restituisce il nome cercato
+    searchChat(){
+      //utilizzo il ciclo for per cercare il nome contatto in contatti, se sono inclusi in search allora visible sarà true altrimenti false
+      this.contacts.forEach((contatto) => {
+          if(contatto.name.toLowerCase().includes(this.search.toLowerCase())){
+              contatto.visible = true;
+          }else{
+              contatto.visible = false;
+          }
+      })
+
+    }
   },
   
   mounted(){
@@ -130,4 +149,5 @@ const app = new Vue({
       this.now = dayjs().format('dddd MM MMMM YYYY HH:mm:ss')
     },1000)
   }
+  
 })

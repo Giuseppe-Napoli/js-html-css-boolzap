@@ -162,12 +162,17 @@ header .header-sx{
   border-bottom: 1px solid #F6F6F6;
 }
 
+.aside-bottom .list-account .utenti li.active {
+  background-color: #dbdfdff8;
+
+}
+
 .aside-bottom .list-account .utenti li:hover {
   background-color: #F4F5F5;
   cursor: pointer;
 }
 
-.aside-bottom .list-account .utenti li:last-child {
+.aside-bottom .list-account .utenti:last-child li {
   border-bottom: none;
 }
 .aside-bottom .list-account .utenti li img{
@@ -223,14 +228,13 @@ header .header-dx i{
 
 .container main section{
   padding: 50px 80px;
-  overflow-y: auto;
+  overflow-y: scroll;
 
 }
 
 .container main section{
   height: calc(100% - 140px);
   background-image: url(../img/mine.jpg);
-  border-right: 10px solid #FAFAFA;
 }
 
 .container main section .text,
@@ -241,8 +245,8 @@ header .header-dx i{
 
 section .text .sent .fa-chevron-down,
 section .text .received .fa-chevron-down{
-  padding: 15px 15px 0px 0px;
-  font-size: 14px;
+  padding: 10px 10px 0px 0px;
+  font-size: 13px;
   color: #B6B9BB;
   display: none;
 } 
@@ -277,6 +281,7 @@ section .text .received:hover .fa-chevron-down{
   font-weight: 600;
   padding: 10px 10px 0px 10px;
   word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
 .container section  .received span,

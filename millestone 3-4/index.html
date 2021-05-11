@@ -45,18 +45,23 @@
           <div class="bottom-top">
             <div class="search-chat">
               <i class="fas fa-search"></i>
-              <input type="text" placeholder="Cerca o inizia una nuova chat" />
+              <input type="text" name="search" v-model="search" placeholder="Cerca o inizia una nuova chat" @keyup="searchChat()">
+              
+              
             </div>
           </div>
           <div class="list-account">
             <template 
             v-for="(contatto,index) in contacts"
+            
             >
               <ul class="utenti">
                 <!-- ciclo v-for per stampare i nomi -->
                 <li 
+                v-if="contatto.visible == true"
+                :class="{'active' : utenteSelezionato == index}"
                 @click ="utenteSelezionato = index">
-                  <img :src="getImage(index)" class="left" alt="avatar" />
+                  <img :src="getImage(index)" class="left" :alt="contatto.name" />
                   <h4 >{{contatto.name}}</h4>
                     <span class="anteprima-chat left">{{contatto.messages[contatto.messages.length - 1].text}}</span>
                     <span class="anteprima-data right">{{contatto.messages[contatto.messages.length - 1].date}}</span>
@@ -82,9 +87,9 @@
       <main class="left">
         <header>
           <div class="header-sx">
-            <img src="assets/img/avatar_1.jpg" alt="avatar_1" class="left" />
+            <img :src="getImage(utenteSelezionato)" alt="avatar_1" class="left" />
             <div class="chat-utente left">
-              <h4>Michele</h4>
+              <h4>{{contacts[utenteSelezionato].name}}</h4>
               <span>Ultimo accesso oggi alle: &nbsp;{{now}}</span>
             </div>
           </div>
@@ -97,15 +102,13 @@
         <section>
 
           <template
-            v-for="(contatto,index) in contacts"
-            v-if="utenteSelezionato === index"
+          v-for="messaggio in contacts[utenteSelezionato].messages"
           >
-            <div class="text right"
-             v-for="messaggio in contatto.messages">
+            <div class="text right">
               <div :class="messaggio.status">
                 <i class="fas fa-chevron-down right"></i>
                 <p>{{messaggio.text}}</p>
-                <span class="right">{{nowTxt}}</span>
+                <span class="right">{{messaggio.date}}</span>
               </div>
             </div>
           </template>
