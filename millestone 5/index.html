@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Boozap</title>
+  </head>
+  <body>
+    
+    <div id="app" class="container">
+      <aside class="left">
+        <div class="aside-top">
+          <div class="top-sx">
+            <img :src="'assets/img/avatar'+ avatar +'.jpg'" alt="avatar_io" class="left" />
+            <h4 class="left">{{name}}</h4>
+          </div>
+          <div class="top-dx">
+            <i class="fas fa-circle-notch"></i>
+            <i class="fas fa-comment-alt"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </div>
+
+        <div class="aside-center">
+          <i class="fas fa-bell-slash left"></i>
+          <div class="area-notifiche left">
+            <h4>Ricevi notifiche di nuovi messaggi</h4>
+            <a href="#">Attiva notifiche desktop</a>
+          </div>
+        </div>
+
+        <div class="aside-bottom">
+          <div class="bottom-top">
+            <div class="search-chat">
+              <i class="fas fa-search"></i>
+              <input type="text" name="search" v-model="search" placeholder="Cerca o inizia una nuova chat" @keyup="searchChat()">
+              
+              
+            </div>
+          </div>
+          <div class="list-account">
+            <template 
+            v-for="(contatto,index) in contacts"
+            
+            >
+              <ul class="utenti">
+                <!-- ciclo v-for per stampare i nomi -->
+                <li 
+                v-if="contatto.visible == true"
+                :class="{'active' : utenteSelezionato == index}"
+                @click ="utenteSelezionato = index">
+                  <img :src="getImage(index)" class="left" :alt="contatto.name" />
+                  <h4 >{{contatto.name}}</h4>
+                    <span class="anteprima-chat left">{{contatto.messages[contatto.messages.length - 1].text}}</span>
+                    <span class="anteprima-data right">{{contatto.messages[contatto.messages.length - 1].date}}</span>
+                </li>
+                <!--  <li>
+                  <img src="assets/img/avatar_2.jpg" class="left" alt="">
+                  <h4 class="left">Fabio</h4>
+                </li>
+                <li>
+                  <img src="assets/img/avatar_3.jpg" class="left" alt="">
+                  <h4 class="left">Samuele</h4>
+                </li>
+                <li>
+                  <img src="assets/img/avatar_4.jpg" class="left" alt="">
+                  <h4 class="left">Luisa</h4>
+                </li> -->
+              </ul>
+            </template> 
+          </div>
+        </div>
+      </aside>
+
+      <main class="left">
+        <header>
+          <div class="header-sx">
+            <img :src="getImage(utenteSelezionato)" alt="avatar_1" class="left" />
+            <div class="chat-utente left">
+              <h4>{{contacts[utenteSelezionato].name}}</h4>
+              <span>Ultimo accesso oggi alle: &nbsp;{{now}}</span>
+            </div>
+          </div>
+          <div class="header-dx">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-paperclip"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+        </header>
+        <section>
+
+          <template
+          v-for="(messaggio,index) in contacts[utenteSelezionato].messages"
+          >
+            <div class="text right">
+              <div :class="messaggio.status">
+                <i class="fas fa-chevron-down right">
+                  <div class="box-txt">
+                    <span
+                      @click ="clearMsg(index)">
+                      Elimina
+                    </span>
+                  </div>
+                </i>
+                <p>{{messaggio.text}}</p>
+                <span class="right">{{messaggio.date}}</span>
+              </div>
+            </div>
+          </template>
+
+        </section>
+        <footer>
+          <i class="far fa-smile"></i>
+
+          <input type="text" v-model="testo" @keyup.enter="addMsg()" placeholder="Scrivi un messaggio">
+          
+          
+          <i class="fas fa-microphone"></i>
+        </footer>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/locale/it.js"></script>
+    <script>
+      dayjs.locale('it')
+    </script>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
