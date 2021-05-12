@@ -123,8 +123,8 @@
         </section>
         <footer>
           <i class="far fa-smile"></i>
-
-          <input type="text" v-model="testo" @keyup.enter="addMsg()" placeholder="Scrivi un messaggio">
+          <!-- mettiamo trim per evitare di iviare testo con spazi vuoti -->
+          <input type="text" v-model.trim="testo" @keyup.enter="addMsg()" placeholder="Scrivi un messaggio">
           
           
           <i class="fas fa-microphone"></i>

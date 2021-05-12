@@ -109,27 +109,33 @@ const app = new Vue({
       return `assets/img/avatar${this.contacts[index].avatar}.jpg`;
     },
 
-    //funzione che aggiunge il testo nella section assegnadogli anche la data e lo status
+    
     addMsg() {
+      //richiamo la funzione inviaMessaggio assegnandogli un testo e un status differenti
+      if(this.testo.length > 0){
+        this.inviaMessaggio(this.testo,'sent')
+        this.testo = '';
+
+        setTimeout(() => {
+          let rispostaRandom = this.risposta[Math.floor(Math.random()*this.risposta.length)]
+          this.inviaMessaggio(rispostaRandom,'received')
+        }, 1000);
+      }
+      
+
+    },
+
+    //funzione per messaggi che aggiunge il testo nella section assegnadogli anche la data e lo status, la creo per evitare di ripetermi nel addMsg()
+    inviaMessaggio(text,status){
+      
       this.contacts[this.utenteSelezionato].messages.push(
         {
           date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-          text: this.testo,
-          status: 'sent'
+          text: text,
+          status: status,
         }
       );
-      this.testo = '';
-      setTimeout(() => {
-        this.contacts[this.utenteSelezionato].messages.push(
-          {
-            date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-            text: this.risposta[Math.floor(Math.random()*this.risposta.length)],
-            status: 'received'
-          }
-        );
-      }, 1000);
     },
-
     //funzione che mi restituisce il nome cercato
     searchChat(){
       //utilizzo il ciclo for per cercare il nome contatto in contatti, se sono inclusi in search allora visible sarà true altrimenti false
